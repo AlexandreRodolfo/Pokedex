@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function (event) {
     catchQuantidade(150);
 });
@@ -59,4 +58,3 @@ function catchQuantidade(quantidade) {
             })
         });
 }
-
