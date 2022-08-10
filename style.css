@@ -117,10 +117,4 @@ body {
   font-family: 'Roboto Light', sans-serif;
 }
 
-@media screen and (max-width: 768px) {
-  .poke-box {
-  }
-  .poke-box img {
-  }
-}
-
+@media screen and (max-width: 768px) {}
