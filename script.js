@@ -1,33 +1,31 @@
 
-
-
-
+document.addEventListener("DOMContentLoaded", function (event) {
+    catchQuantidade(150);
+});
 
 var total = document.getElementById('quantidade');
 total.addEventListener('keyup', () => {
     catchQuantidade(total.value);
-    document.addEventListener("DOMContentLoaded", function (event) {
-        showCatchQuantidade();
-    });
 })
 
 function showCatchQuantidade() {
-    document.getElementById("loadingBall").style(display, "none");
+    var loadball = document.getElementById("loadingBall")
+    if (loadball.hidden) {
+        loadball.hidden = false;
+    } else {
+        loadball.hidden = true;
+    }
 }
 
 function catchQuantidade(quantidade) {
     fetch('https://pokeapi.co/api/v2/pokemon?limit=' + quantidade)
         .then(response => response.json())
         .then(allPokemon => {
-
             var pokemons = [];
-
             //results é uma informacao da pokeAPI
             allPokemon.results.map((val) => {
-
                 //precisamos fazer outro fetch para a url para pegarmos as informacoes
                 //que contem a imagem do pokemon
-
                 fetch(val.url).then(response => response.json())
                     .then(pokeSingle => {
                         pokemons.push({ nome: val.name, imagem: pokeSingle.sprites.front_default, id: pokeSingle.id });
@@ -47,14 +45,18 @@ function catchQuantidade(quantidade) {
                             `;
                             })
 
+                        } else {
+                            pokeBoxes.innerHTML = `
+                            <div class="center-on-page" id="loadingBall">
+                                <div class="pokeball">
+                                    <div class="pokeball__button"></div>
+                                </div>
+                            </div>
+                            `;
                         }
 
                     })
             })
-
-
-
-
-
         });
 }
+
